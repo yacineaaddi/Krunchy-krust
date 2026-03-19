@@ -2,14 +2,14 @@ import PropTypes from "prop-types";
 
 const containerStyle = {
   display: "flex",
-  alignitem: "center",
-  justifycontent: "center",
+  alignItem: "center",
+  justifyContent: "center",
 };
 
 const starContainerStyle = {
   display: "flex",
-  alignitem: "center",
-  justifycontent: "center",
+  alignItem: "center",
+  justifyContent: "center",
   gap: "3px",
 };
 
