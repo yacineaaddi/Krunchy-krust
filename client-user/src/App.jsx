@@ -4,7 +4,7 @@ import OrdersConfirmations from "./features/orders/OrdersConfirmations";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Orderstracking from "./features/tracking/Orderstracking";
 import AppLayout from "./features/appLayout/AppLayout";
-import HomePage from "./features/home/Homepage";
+import HomePage from "./features/home/HomePage";
 import NotFound from "./components/NotFound";
 import Cart from "./features/cart/Cart";
 import Menu from "./features/menu/Menu";
