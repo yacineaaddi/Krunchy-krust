@@ -21,8 +21,7 @@
     "react-spinners": "^0.17.0",
     "socket.io-client": "^4.8.3",
     "styled-components": "^6.3.8",
-    "swiper": "^12.1.2",
-    "toast": "^0.5.4"
+    "swiper": "^12.1.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
