@@ -115,25 +115,22 @@ router.post("/login/driver", async (req, res) => {
     user.refreshToken = refreshToken;
     await user.save();
 
-    console.log(accessToken);
-    console.log(refreshToken);
-
     res
       .cookie("accessToken", accessToken, {
-        secure: false, // important for localhost
-        sameSite: "lax", // works with localhost ports
+        //secure: false, // important for localhost
+        //sameSite: "lax", // works with localhost ports
         httpOnly: true,
         path: "/",
-        //secure: true,
-        //sameSite: "none",
+        secure: true,
+        sameSite: "none",
       })
       .cookie("refreshToken", refreshToken, {
-        secure: false, // important for localhost
-        sameSite: "lax", // works with localhost ports
+        //secure: false, // important for localhost
+        //sameSite: "lax", // works with localhost ports
         httpOnly: true,
         path: "/refresh",
-        //secure: true,
-        //sameSite: "none",
+        secure: true,
+        sameSite: "none",
       })
       .status(200)
       .json({
@@ -170,20 +167,20 @@ router.post("/login/admin", async (req, res) => {
 
     res
       .cookie("accessToken", accessToken, {
-        secure: false, // important for localhost
-        sameSite: "lax", // works with localhost ports
+        //secure: false, // important for localhost
+        //sameSite: "lax", // works with localhost ports
         httpOnly: true,
         path: "/",
-        //secure: true,
-        //sameSite: "none",
+        secure: true,
+        sameSite: "none",
       })
       .cookie("refreshToken", refreshToken, {
-        secure: false, // important for localhost
-        sameSite: "lax", // works with localhost ports
+        //secure: false, // important for localhost
+        //sameSite: "lax", // works with localhost ports
         httpOnly: true,
         path: "/refresh",
-        //secure: true,
-        //sameSite: "none",
+        secure: true,
+        sameSite: "none",
       })
       .status(200)
       .json({
