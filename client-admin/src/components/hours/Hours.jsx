@@ -120,6 +120,10 @@ const Hours = () => {
                   </div>
                 ))}
               </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> b0a0406c7e642936a3f5c6a1a9e3f5a2c5874863
               <button
                 className="Hours-Addinterval"
                 onClick={() =>

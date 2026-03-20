@@ -27,9 +27,7 @@ const AppLayout = () => {
 
   const [driverPosition, setDriverPosition] = useState(null);
   const [availableHours, setAvailableHours] = useState(null);
-  const [storestatus, setStoreStatus] = useState();
   const [tracked, setTracked] = useState([]);
-  const [now, setNow] = useState();
   const [menu, setMenu] = useState([]);
 
   const isInList = (item, list) => {
@@ -41,42 +39,6 @@ const AppLayout = () => {
     [availableHours],
   );
 
-  /*
-  useEffect(() => {
-    if (!availableHours) return; // ✅ wait until data is ready
-
-    const interval = setInterval(() => {
-      const statusResult = getStoreStatus(availableHours);
-      /*
-      setStoreStatus((prev) => {
-        if (
-          prev.isOpen !== statusResult.isOpen ||
-          prev.openTime !== statusResult.openTime ||
-          prev.closeTime !== statusResult.closeTime
-        ) {
-          return statusResult;
-        }
-
-        return prev;
-      });
-    }, 500);
-
-    return () => clearInterval(interval);
-  }, [availableHours]);*/
-  /*
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setNow(Date.now());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);*/
-  /*
-  const storestatus = useMemo(() => {
-    if (!availableHours) return { isOpen: false };
-    return getStoreStatus(availableHours);
-  }, [availableHours, now]);
-*/
   useEffect(() => {
     let mounted = true;
 
