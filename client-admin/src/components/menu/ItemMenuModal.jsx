@@ -46,7 +46,7 @@ const ItemMenuModal = ({ item, handleSave }) => {
         <img
           src={`${BASE_URL}${item.image}`}
           className="h-[100%] w-[100%] object-cover"
-          loading="lazy"
+          alt={item.name}
         />
       </div>
 

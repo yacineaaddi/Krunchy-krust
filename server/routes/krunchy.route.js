@@ -45,16 +45,13 @@ const generateToken = (user) => {
 };
 router.get("/menu", async (req, res) => {
   const menu = await StoreMenu.findOne();
-  console.log("menu", menu);
   if (!menu) {
     return res.json([]);
   }
-  console.log("menu.items", menu.items);
   res.json(menu.items);
 });
 //Route for editing store menu - Admin
 router.post("/admin/menu", protect, requireAdmin, async (req, res) => {
-  console.log(req.body);
   try {
     const menu = await StoreMenu.findOneAndUpdate(
       {},
@@ -192,18 +189,11 @@ router.post("/login/admin", async (req, res) => {
 });
 //Route for retrieving (req.user) - Admin and Driver
 router.get("/me", protect, async (req, res) => {
-  console.log("me route is called");
-  console.log("Cookies:", req.cookies);
-  console.log("Access:", req.cookies?.accessToken);
-  console.log("Refresh:", req.cookies?.refreshToken);
   res.status(200).json(req.user);
 });
 //Route for refresh token - Admin and Driver
 router.post("/refresh", async (req, res) => {
-  console.log("refresh is called");
   const refreshToken = req.cookies.refreshToken;
-  console.log(req.cookies);
-  console.log(refreshToken);
   if (!refreshToken)
     return res.status(401).json({ message: "No refresh token provided" });
 
@@ -213,7 +203,6 @@ router.post("/refresh", async (req, res) => {
 
     if (!user) {
       //return res.status(401).json({ message: "No user found" });
-      console.log("No user found");
       return res.status(401).json({ message: "No user found" });
     }
     if (user.refreshToken !== refreshToken) return res.status(403);
@@ -238,7 +227,6 @@ router.post("/refresh", async (req, res) => {
 });
 //Route for saving new order - User
 router.post("/neworder", async (req, res) => {
-  console.log(req.body);
   const { latitude, longitude } = req.body.location;
   try {
     const orderId = Math.floor(1000 + Math.random() * 9000); // generates 1000–9999
@@ -264,14 +252,11 @@ router.post("/neworder", async (req, res) => {
 
     res.status(200).json(newKrunchy);
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: error.message });
   }
 });
 //Route for fetching orders - User
 router.post("/myorders", async (req, res) => {
-  console.log("my order is called");
-  console.log(req.body);
   try {
     const { trackedIds } = req.body;
     const orders = await NewOrder.find({
@@ -284,10 +269,6 @@ router.post("/myorders", async (req, res) => {
 });
 // I think this route is never used
 router.get("/orders", protect, async (req, res) => {
-  console.log("get orders route is called");
-  console.log("Cookies:", req.cookies);
-  console.log("Access:", req.cookies?.accessToken);
-  console.log("Refresh:", req.cookies?.refreshToken);
   try {
     const Orders = await NewOrder.find();
     res.json(Orders);
@@ -302,8 +283,6 @@ router.put(
   protect,
   requireAdmin,
   async (req, res) => {
-    console.log("admin change status is called");
-
     const { orderId } = req.params;
     const { action, reject_message } = req.body.payload;
     try {
@@ -355,11 +334,8 @@ router.put(
         (sum, item) => sum + item.prep_time,
         0,
       );
-      console.log(totalPrepTime);
       const PREP_TIME_MINUTES = totalPrepTime / order.Order.length;
-      console.log(PREP_TIME_MINUTES);
       const readyAt = Date.now() + PREP_TIME_MINUTES * 60000;
-      console.log(readyAt);
       order.status = action;
       order.readyAt = readyAt;
       //order.timeline.push({ status: action, at: new Date() });
@@ -383,14 +359,10 @@ router.put(
   protect,
   requireDriver,
   async (req, res) => {
-    console.log("driver change status is called");
     const token = process.env.ACCESS_TOKEN;
     const chatId = process.env.CHAT_ID;
-    console.log(req.body.payload);
     const { orderId } = req.params;
     const { action, paid } = req.body.payload;
-    console.log(action);
-    console.log(paid);
     try {
       const order = await NewOrder.findById(orderId);
 
@@ -552,7 +524,6 @@ router.put("/admin/working-hours", protect, requireAdmin, async (req, res) => {
     });
 
     io.emit("order:updateHours", workingHours);
-    console.log("updated successfully");
 
     res.json({ ok: true });
   } catch (error) {
@@ -565,10 +536,8 @@ router.get("/working-hours", async (req, res) => {
   const CollectionID = process.env.HOURS_COLLECTION_ID;
   try {
     const response = await StoreHours.findById(CollectionID);
-    console.log("res", response);
     const { workingHours } = response;
     const workinghours = { workingHours };
-    console.log(workinghours);
     res.json(workinghours);
   } catch (error) {
     console.error("Save error:", error);
