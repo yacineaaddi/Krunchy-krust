@@ -30,11 +30,10 @@
   }
   .Menu-Available {
     @apply mt-4 flex flex-row items-center justify-between;
-  } /**/
+  }
   .Menu-NewImage {
     @apply mr-4 block cursor-pointer rounded-md border-0 bg-cyan-300 px-4 py-2 text-sm font-semibold text-white hover:bg-cyan-300;
   }
-
   .Menu-ItemForm {
     @apply flex w-[85%] flex-row items-center self-center rounded-xl border-[1px] border-dashed border-cyan-300;
   }
@@ -98,7 +97,6 @@
   .ui-loader {
     @apply flex h-screen w-screen items-center justify-center;
   }
-
   .ui-head-title {
     @apply absolute left-[50%] top-[4%] flex w-fit -translate-x-[50%] -translate-y-[4%] cursor-pointer items-center justify-center rounded-full bg-[#01634a] px-8 py-3 font-[600] text-white lg:left-[50%] lg:top-[5%] lg:-translate-x-[50%] lg:-translate-y-[5%] lg:text-lg lg:font-bold;
   }
@@ -164,7 +162,7 @@
     @apply fixed bottom-0 left-0 right-0 z-40 max-h-fit w-full rounded-t-[43px] bg-primary py-2 lg:top-0 lg:mx-auto lg:mt-10 lg:w-2/4 lg:rounded-full;
   }
   .login-component {
-    @apply flex min-h-screen items-center justify-center bg-cyan-300;
+    @apply flex min-h-screen items-center justify-center overflow-hidden border-4 border-red-500 bg-cyan-300;
   }
   .login-error {
     @apply mb-2 mt-6 text-center text-red-500;

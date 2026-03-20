@@ -19,7 +19,7 @@ const allowedOrigins = [
   process.env.DRIVER_URL,
   process.env.ADMIN_URL,
 ].filter(Boolean);
-
+console.log(allowedOrigins);
 app.use(
   cors({
     origin: allowedOrigins,

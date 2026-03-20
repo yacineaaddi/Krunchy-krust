@@ -252,13 +252,13 @@ div {
     @apply relative mb-[35px] flex h-fit w-[96%] flex-col items-center justify-center gap-6 rounded-xl bg-white px-4 py-12 lg:w-[45%] 2xl:w-[24%];
   }
   .cart-box-container {
-    @apply flex w-full flex-row flex-wrap items-center justify-center gap-5 px-2;
+    @apply flex w-full flex-row flex-wrap items-center justify-center gap-5;
   }
   .empty-cart {
     @apply self-center rounded-xl border-2 border-cyan-300 bg-white px-4 py-2 text-lg font-semibold text-cyan-300;
   }
   .confirm-button {
-    @apply fixed bottom-[115px] z-50 flex w-fit cursor-pointer items-center justify-between gap-3 self-center rounded-full border-[1px] border-white bg-cyan-100 px-4 py-3 font-bold text-white md:w-[210px] lg:bottom-[65px];
+    @apply fixed bottom-[115px] z-50 flex w-fit cursor-pointer items-center justify-between gap-3 self-center rounded-full border-[1px] border-white bg-cyan-100 px-8 py-3 font-bold text-white md:w-[210px] lg:bottom-[65px];
   }
   .cart-container {
     @apply flex w-[95%] flex-col gap-16 md:w-[70%] md:pt-[55px] lg:w-[75%] lg:pt-[72px];
