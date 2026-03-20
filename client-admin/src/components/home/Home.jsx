@@ -16,7 +16,6 @@ const Home = () => {
         const res = await api.get("/orders");
         if (JSON.stringify(res.data) !== JSON.stringify(orders)) {
           setOrders(res.data);
-          console.log(res.data);
         }
       } catch (error) {
         console.error(error.response?.data || error.message);

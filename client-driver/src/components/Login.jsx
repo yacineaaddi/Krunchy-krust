@@ -36,7 +36,6 @@ const Login = ({ setUser }) => {
       const { id } = res.data;
 
       localStorage.setItem("user", id);
-
       setUser(id);
       navigate("/");
     } catch (error) {

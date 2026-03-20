@@ -211,12 +211,12 @@ router.post("/refresh", async (req, res) => {
 
     res
       .cookie("accessToken", newAccessToken, {
-        secure: false, // important for localhost
-        sameSite: "lax", // works with localhost ports
+        //secure: false,  important for localhost
+        //sameSite: "lax", // works with localhost ports
         httpOnly: true,
         path: "/",
-        //secure: true,
-        //sameSite: "none",
+        secure: true,
+        sameSite: "none",
       })
       .status(200)
       .json({ accessToken: newAccessToken });

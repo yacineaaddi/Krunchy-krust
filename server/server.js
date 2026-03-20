@@ -19,7 +19,7 @@ const allowedOrigins = [
   process.env.DRIVER_URL,
   process.env.ADMIN_URL,
 ].filter(Boolean);
-console.log(allowedOrigins);
+
 app.use(
   cors({
     origin: allowedOrigins,
@@ -53,7 +53,6 @@ io.on("connection", (socket) => {
   // Order rooms
   socket.on("order:join", (orderId) => {
     socket.join(`order:${orderId}`);
-    console.log(`Socket joined order:${orderId}`);
   });
 
   socket.on("order:leave", (orderId) => {
@@ -64,7 +63,6 @@ io.on("connection", (socket) => {
 
   socket.on("admin:join", () => {
     socket.join("admin");
-    console.log(`Socket ${socket.id} joined admin room`);
   });
 
   socket.on("admin:leave", () => {
@@ -75,7 +73,6 @@ io.on("connection", (socket) => {
 
   socket.on("driver:join", () => {
     socket.join("driver");
-    console.log(`Socket ${socket.id} joined driver room`);
   });
 
   socket.on("driver:leave", () => {
@@ -83,7 +80,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log("Client disconnected:", socket.id);
   });
 });
 
