@@ -93,14 +93,11 @@ function App() {
       </>
     );
   };
-  /*
-  if (loading) {
-    return <Loader />;
-  }*/
+
   return (
     <>
       {/*loading && <Loader />*/}
-      {<Toaster position="top-center" reverseOrder={false} />}
+      <Toaster position="top-center" reverseOrder={false} />
       <BrowserRouter>
         <Routes>
           <Route element={<ProtectedRoute user={user} setUser={setUser} />}>

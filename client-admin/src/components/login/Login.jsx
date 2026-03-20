@@ -38,7 +38,6 @@ const Login = ({ setUser }) => {
 
       setUser(id);
       navigate("/");
-      toast.success("Logged successfully");
     } catch (error) {
       toast.error(error.response?.data || error.message);
     } finally {
