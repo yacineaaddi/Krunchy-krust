@@ -123,7 +123,7 @@ function App() {
 
   return (
     <>
-      {<Toaster position="top-center" reverseOrder={false} />}
+      <Toaster position="top-center" reverseOrder={false} />
       <BrowserRouter>
         <Routes>
           <Route element={<ProtectedRoute user={user} setUser={setUser} />}>

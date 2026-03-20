@@ -72,53 +72,54 @@ const Hours = () => {
                   {data.enabled ? "Open" : "Close"}
                 </div>
               </div>
-              {data?.ranges?.map((range, i) => (
-                <div key={i} className="mt-2 flex gap-5">
-                  <div className="Hours-intervals">
-                    <input
-                      type="time"
-                      value={range.from}
-                      disabled={!data.enabled}
-                      onChange={(e) => {
-                        const val = e.target.value;
+              <div className="max-w-full">
+                {data?.ranges?.map((range, i) => (
+                  <div key={i} className="mt-2 flex gap-5">
+                    <div className="Hours-intervals">
+                      <input
+                        type="time"
+                        value={range.from}
+                        disabled={!data.enabled}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setWorkingHours((prev) => {
+                            const ranges = [...prev[day].ranges];
+                            ranges[i] = { ...ranges[i], from: val };
+                            return { ...prev, [day]: { ...prev[day], ranges } };
+                          });
+                        }}
+                      />
+                      <span>-</span>
+                      <input
+                        type="time"
+                        value={range.to}
+                        disabled={!data.enabled}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setWorkingHours((prev) => {
+                            const ranges = [...prev[day].ranges];
+                            ranges[i] = { ...ranges[i], to: val };
+                            return { ...prev, [day]: { ...prev[day], ranges } };
+                          });
+                        }}
+                      />
+                    </div>
+
+                    <button
+                      onClick={() => {
                         setWorkingHours((prev) => {
-                          const ranges = [...prev[day].ranges];
-                          ranges[i] = { ...ranges[i], from: val };
+                          const ranges = prev[day].ranges.filter(
+                            (_, idx) => idx !== i,
+                          );
                           return { ...prev, [day]: { ...prev[day], ranges } };
                         });
                       }}
-                    />
-                    <span>-</span>
-                    <input
-                      type="time"
-                      value={range.to}
-                      disabled={!data.enabled}
-                      onChange={(e) => {
-                        const val = e.target.value;
-                        setWorkingHours((prev) => {
-                          const ranges = [...prev[day].ranges];
-                          ranges[i] = { ...ranges[i], to: val };
-                          return { ...prev, [day]: { ...prev[day], ranges } };
-                        });
-                      }}
-                    />
+                    >
+                      ❌
+                    </button>
                   </div>
-
-                  <button
-                    onClick={() => {
-                      setWorkingHours((prev) => {
-                        const ranges = prev[day].ranges.filter(
-                          (_, idx) => idx !== i,
-                        );
-                        return { ...prev, [day]: { ...prev[day], ranges } };
-                      });
-                    }}
-                  >
-                    ❌
-                  </button>
-                </div>
-              ))}
-
+                ))}
+              </div>
               <button
                 className="Hours-Addinterval"
                 onClick={() =>

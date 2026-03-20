@@ -108,6 +108,7 @@ const OrderCard = ({ item, getLocation }) => {
                     options={rejectOptions}
                     onChange={setSelected}
                     value={selected}
+                    isSearchable={false}
                   />
                 </div>
                 <div className="decision-buttons">
