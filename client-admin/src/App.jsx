@@ -1,4 +1,4 @@
-import { Route, Navigate, Outlet } from "react-router-dom";
+import { Route, Navigate, Outlet, Routes } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Logout from "./components/logout/Logout";
 import { useLocation } from "react-router-dom";
@@ -20,7 +20,7 @@ function App() {
   const storedId = localStorage.getItem("user");
 
   const location = useLocation();
-  const currentPath = location.pathname;
+  const currentPath = location.pathname.split("/")[1];
 
   const [user, setUser] = useState(() => {
     const stored = localStorage.getItem("user");
@@ -144,7 +144,7 @@ function App() {
   };
 
   return (
-    <>
+    <Routes>
       <Route element={<ProtectedRoute user={user} setUser={setUser} />}>
         <Route path="/" element={<Home />} />
         <Route path="/hours" element={<Hours />} />
@@ -163,7 +163,7 @@ function App() {
         }
       />
       <Route path="*" element={<NotFound />} />
-    </>
+    </Routes>
   );
 }
 
