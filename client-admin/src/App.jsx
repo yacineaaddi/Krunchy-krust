@@ -15,6 +15,9 @@ import Loader from "./ui/Loader";
 import api from "./api/api";
 
 function App() {
+  const { loading, setLoading, setOrders, setMenu, setOriginalMenu, setKey } =
+    useApp();
+
   const alarm = new Audio("/sounds/Firebell.mp3");
 
   const storedId = localStorage.getItem("user");
@@ -27,14 +30,11 @@ function App() {
     return stored ? stored : null;
   });
 
-  const { loading, setLoading, setOrders, setMenu, setOriginalMenu } = useApp();
-
   useEffect(() => {
     const handleVisibility = () => {
       if (document.visibilityState === "visible") {
-        console.log(currentPath);
         if (!currentPath === "") return;
-        location.reload();
+        setKey((prevKey) => prevKey + 1);
       }
     };
 
