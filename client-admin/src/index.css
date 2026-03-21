@@ -135,10 +135,13 @@
     @apply w-fit rounded-xl px-2 py-2 font-bold text-green;
   }
   .order-container {
-    @apply flex h-fit w-[90%] flex-col gap-5 rounded-3xl border-[1px] border-gray-300 bg-white p-5 md:w-[70%] lg:w-[75%];
+    @apply flex h-fit w-[90%] flex-col gap-5 rounded-3xl border-[1px] border-gray-300 bg-white p-5 2xl:w-[25%];
   }
   .orders-empty {
     @apply self-center rounded-xl border-2 border-cyan-300 bg-white px-4 py-2 text-lg font-semibold text-cyan-300;
+  }
+  .order-full {
+    @apply flex w-full flex-row flex-wrap justify-center gap-10 lg:w-[85%];
   }
   .orders-loading {
     @apply self-center rounded-xl border-2 border-cyan-300 bg-white px-4 py-2 text-lg font-semibold text-cyan-300;
@@ -148,9 +151,6 @@
   }
   .logout-button {
     @apply cursor-pointer rounded-xl px-6 py-2 text-white;
-  }
-  .logout-box {
-    @apply flex h-[260px] w-[85%] flex-col items-center gap-8 rounded-xl bg-white p-6 lg:w-[30%];
   }
   .logout-component {
     @apply fixed z-[50] flex h-[100dvh] w-full items-center justify-center bg-gray-800 bg-opacity-80;

@@ -49,11 +49,14 @@
   .order-number {
     @apply w-fit rounded-xl p-2 px-3 py-2 font-bold text-green;
   }
+  .order-full {
+    @apply flex w-full flex-row flex-wrap justify-center gap-10 lg:w-[85%];
+  }
   .order-box {
     @apply flex flex-col gap-4 py-3;
   }
   .order-container {
-    @apply flex h-fit w-[90%] flex-col gap-5 rounded-3xl bg-white p-5 md:w-[70%] lg:w-[75%];
+    @apply flex h-fit w-[90%] flex-col gap-5 rounded-3xl border-[1px] border-gray-300 bg-white p-5 2xl:w-[25%];
   }
   .ui-loader {
     @apply flex h-screen w-screen items-center justify-center;

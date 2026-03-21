@@ -24,7 +24,7 @@ div {
     @apply w-[80%] self-center text-center font-semibold text-green;
   }
   .tracking-status {
-    @apply flex w-full flex-col items-center gap-5 rounded-3xl p-4 lg:flex-row;
+    @apply flex w-full flex-col items-center justify-center gap-5 rounded-3xl p-4 lg:flex-row;
   }
   .tracking-order {
     @apply w-fit text-center font-[400] text-black;
@@ -297,7 +297,7 @@ div {
     @apply absolute left-[50%] top-[4%] flex min-w-[350px] max-w-fit -translate-x-[50%] -translate-y-[4%] cursor-pointer items-center justify-center rounded-3xl border-[1px] border-cyan-100 bg-[#01634a] px-10 py-5 text-base font-[600] text-white sm:min-w-fit lg:left-[50%] lg:top-[95%] lg:-translate-x-[50%] lg:-translate-y-[95%] lg:text-lg lg:font-bold;
   }
   .trackingbox {
-    @apply flex w-[98%] flex-row items-center justify-around gap-4 rounded-xl border-[1px] border-cyan-300 p-2 lg:w-[22%];
+    @apply flex w-[98%] flex-row items-center justify-around gap-4 rounded-xl border-[1px] border-cyan-300 p-2 lg:w-[36%];
   }
   .trackingstatus {
     @apply flex flex-row items-center justify-around gap-2;

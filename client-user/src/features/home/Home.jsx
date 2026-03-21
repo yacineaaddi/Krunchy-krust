@@ -19,7 +19,7 @@ export default function Home() {
 
     const animate = () => {
       if (containerRef.current) {
-        rotationRef.current += 0.9;
+        rotationRef.current += 1.1;
 
         containerRef.current.style.transform = `translate(-50%, -50%) rotate(${rotationRef.current}deg)`;
 

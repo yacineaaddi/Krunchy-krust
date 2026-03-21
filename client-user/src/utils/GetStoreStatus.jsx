@@ -5,7 +5,6 @@ function toMinutes(time) {
 
 export function getStoreStatus(workingHours) {
   if (!workingHours) return { isOpen: false };
-  console.log(workingHours);
   const now = new Date();
   const todayIndex = now.getDay();
 
@@ -21,22 +20,16 @@ export function getStoreStatus(workingHours) {
 
   const todayName = days[todayIndex];
   const todayHours = workingHours[todayName];
-  console.log(todayHours);
-
   const timeNow = now.toLocaleTimeString("en-GB", {
     hour: "2-digit",
     minute: "2-digit",
   });
 
-  console.log(timeNow);
 
   const nowMin = toMinutes(timeNow);
 
-  console.log(nowMin);
-
   // If day disabled or no ranges
   if (!todayHours?.enabled || !todayHours?.ranges?.length) {
-    console.log("day disabled or no ranges");
     return {
       isOpen: false,
       today: todayName,

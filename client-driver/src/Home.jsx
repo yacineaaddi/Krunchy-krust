@@ -24,7 +24,6 @@ const Home = () => {
   useEffect(() => {
     const handleVisibility = () => {
       if (document.visibilityState === "visible") {
-        console.log(currentPath);
         if (!currentPath === "") return;
         setKey((prevKey) => prevKey + 1);
       }
@@ -110,22 +109,24 @@ const Home = () => {
       {isLoading ? (
         <div className="orders-status">Loading orders...</div>
       ) : orders?.length >= 1 ? (
-        orders
-          ?.filter((item) =>
-            ["CONFIRMED", "READY", "OUT_FOR_DELIVERY", "DELIVERED"].includes(
-              item.status,
-            ),
-          )
-          .slice()
-          .reverse()
-          .map((item, index) => (
-            <OrderCard
-              key={item._id}
-              item={item}
-              index={index}
-              getLocation={getLocation}
-            />
-          ))
+        <div className="order-full">
+          {orders
+            ?.filter((item) =>
+              ["CONFIRMED", "READY", "OUT_FOR_DELIVERY", "DELIVERED"].includes(
+                item.status,
+              ),
+            )
+            .slice()
+            .reverse()
+            .map((item, index) => (
+              <OrderCard
+                key={item._id}
+                item={item}
+                index={index}
+                getLocation={getLocation}
+              />
+            ))}
+        </div>
       ) : (
         <div className="orders-status">No orders in queue</div>
       )}

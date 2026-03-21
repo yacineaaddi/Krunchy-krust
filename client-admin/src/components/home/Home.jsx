@@ -60,16 +60,18 @@ const Home = () => {
       {isLoading ? (
         <div className="orders-loading">Loading orders...</div>
       ) : orders?.length >= 1 ? (
-        orders
-          ?.map((item, index) => (
-            <OrderCard
-              item={item}
-              index={index}
-              key={index}
-              getLocation={getLocation}
-            />
-          ))
-          .reverse()
+        <div className="order-full">
+          {orders
+            ?.map((item, index) => (
+              <OrderCard
+                item={item}
+                index={index}
+                key={index}
+                getLocation={getLocation}
+              />
+            ))
+            .reverse()}
+        </div>
       ) : (
         <div className="orders-empty">No order in queue</div>
       )}
