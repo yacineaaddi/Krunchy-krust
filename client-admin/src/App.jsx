@@ -1,13 +1,14 @@
 import { Route, Navigate, Outlet, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Logout from "./components/logout/Logout";
-import { useLocation } from "react-router-dom";
 import Hours from "./components/hours/Hours";
 import Login from "./components/login/Login";
 import { useState, useEffect } from "react";
 import Home from "./components/home/Home";
 import { useApp } from "./context/useApp";
 import Menu from "./components/menu/Menu";
+import { Toaster } from "react-hot-toast";
 import { socket } from "./socket/socket";
 import NotFound from "./ui/NotFound";
 import toast from "react-hot-toast";
@@ -15,35 +16,16 @@ import Loader from "./ui/Loader";
 import api from "./api/api";
 
 function App() {
-  const { loading, setLoading, setOrders, setMenu, setOriginalMenu, setKey } =
-    useApp();
+  const { loading, setLoading, setOrders, setMenu, setOriginalMenu } = useApp();
 
   const alarm = new Audio("/sounds/Firebell.mp3");
 
   const storedId = localStorage.getItem("user");
 
-  const location = useLocation();
-  const currentPath = location.pathname.split("/")[1];
-
   const [user, setUser] = useState(() => {
     const stored = localStorage.getItem("user");
     return stored ? stored : null;
   });
-
-  useEffect(() => {
-    const handleVisibility = () => {
-      if (document.visibilityState === "visible") {
-        if (!currentPath === "") return;
-        setKey((prevKey) => prevKey + 1);
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibility);
-
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibility);
-    };
-  }, []);
 
   useEffect(() => {
     async function fetchMenu() {
@@ -144,26 +126,31 @@ function App() {
   };
 
   return (
-    <Routes>
-      <Route element={<ProtectedRoute user={user} setUser={setUser} />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/hours" element={<Hours />} />
-        <Route path="/menu" element={<Menu />} />
-      </Route>
-      <Route
-        path="/login"
-        element={
-          loading ? (
-            <Loader />
-          ) : user ? (
-            <Navigate to="/" />
-          ) : (
-            <Login setUser={setUser} />
-          )
-        }
-      />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+      <Toaster position="top-center" reverseOrder={false} />
+      <BrowserRouter>
+        <Routes>
+          <Route element={<ProtectedRoute user={user} setUser={setUser} />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/hours" element={<Hours />} />
+            <Route path="/menu" element={<Menu />} />
+          </Route>
+          <Route
+            path="/login"
+            element={
+              loading ? (
+                <Loader />
+              ) : user ? (
+                <Navigate to="/" />
+              ) : (
+                <Login setUser={setUser} />
+              )
+            }
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>{" "}
+      </BrowserRouter>
+    </>
   );
 }
 

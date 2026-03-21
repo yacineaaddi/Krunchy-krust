@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import { useApp } from "../../context/useApp";
 import { useState, useEffect } from "react";
 import OrderCard from "./OrderCard";
@@ -5,11 +6,29 @@ import Title from "../../ui/Title";
 import api from "../../api/api";
 
 const Home = () => {
-  const { orders, setOrders, key } = useApp();
+  const { orders, setOrders, key, setKey } = useApp();
 
   const user = localStorage.getItem("user");
 
   const [isLoading, setIsLoading] = useState(true);
+
+  const location = useLocation();
+  const currentPath = location.pathname.split("/")[1];
+
+  useEffect(() => {
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        if (!currentPath === "") return;
+        setKey((prevKey) => prevKey + 1);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
