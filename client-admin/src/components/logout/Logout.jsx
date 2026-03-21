@@ -10,6 +10,7 @@ const Logout = ({ setUser, setLogout }) => {
     localStorage.removeItem("user");
     setLogout(false);
   };
+
   return (
     <div className="logout-component">
       <div className="logout-box">

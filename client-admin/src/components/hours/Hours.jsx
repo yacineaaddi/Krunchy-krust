@@ -77,6 +77,7 @@ const Hours = () => {
                   <div key={i} className="mt-2 flex gap-5">
                     <div className="Hours-intervals">
                       <input
+                        className="w-[40%]"
                         type="time"
                         value={range.from}
                         disabled={!data.enabled}
@@ -91,6 +92,7 @@ const Hours = () => {
                       />
                       <span>-</span>
                       <input
+                        className="w-[40%]"
                         type="time"
                         value={range.to}
                         disabled={!data.enabled}

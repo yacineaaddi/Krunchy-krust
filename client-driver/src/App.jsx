@@ -84,6 +84,15 @@ function App() {
 
   const ProtectedRoute = ({ user, setUser }) => {
     const [logout, setLogout] = useState(false);
+
+    useEffect(() => {
+      document.body.style.overflow = logout ? "hidden" : "visible";
+
+      return () => {
+        document.body.style.overflow = "visible";
+      };
+    }, [logout]);
+
     if (!user) return <Navigate to="/login" replace />;
     return (
       <>

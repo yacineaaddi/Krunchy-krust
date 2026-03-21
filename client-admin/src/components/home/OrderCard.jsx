@@ -66,7 +66,7 @@ const OrderCard = ({ item, getLocation }) => {
               {item?.Order?.map(
                 (currEl) =>
                   `
-                    ${currEl.Qty} ${currEl.name} ${currEl.completeMenu ? "MC" : "SOLO"}
+                    ${currEl.Qty} ${currEl.name}
                   `,
               ).join("-")}
             </div>

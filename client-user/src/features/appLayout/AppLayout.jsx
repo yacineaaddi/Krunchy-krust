@@ -8,8 +8,12 @@ import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
 import api from "../../api/api";
 import { useMemo } from "react";
+import { useLocation } from "react-router-dom";
 
 const AppLayout = () => {
+  const location = useLocation();
+  const currentPath = location.pathname.split("/")[1];
+
   const [trackedIds, setTrackedIds] = useState(() => {
     const tracked = localStorage.getItem("trackedIds");
     return tracked ? JSON.parse(tracked) : [];
@@ -29,6 +33,7 @@ const AppLayout = () => {
   const [availableHours, setAvailableHours] = useState(null);
   const [tracked, setTracked] = useState([]);
   const [menu, setMenu] = useState([]);
+  const [key, setKey] = useState(0);
 
   const isInList = (item, list) => {
     return list.some((curr) => curr.id === item.id);
@@ -38,6 +43,21 @@ const AppLayout = () => {
     () => getStoreStatus(availableHours),
     [availableHours],
   );
+
+  useEffect(() => {
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        if (!currentPath === "tracking") return;
+        setKey((prevKey) => prevKey + 1);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
+  }, []);
 
   useEffect(() => {
     let mounted = true;
@@ -202,6 +222,8 @@ const AppLayout = () => {
           AvailableStatus,
           availableHours,
           groupedMenu,
+          key,
+          setKey,
         }}
       />
     </div>

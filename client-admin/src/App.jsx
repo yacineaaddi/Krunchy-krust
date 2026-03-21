@@ -1,5 +1,6 @@
 import Navbar from "./components/navbar/Navbar";
 import Logout from "./components/logout/Logout";
+import { useLocation } from "react-router-dom";
 import Hours from "./components/hours/Hours";
 import Login from "./components/login/Login";
 import { useState, useEffect } from "react";
@@ -23,6 +24,8 @@ import {
 function App() {
   const alarm = new Audio("/sounds/Firebell.mp3");
   const storedId = localStorage.getItem("user");
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const [user, setUser] = useState(() => {
     const stored = localStorage.getItem("user");
@@ -30,6 +33,22 @@ function App() {
   });
 
   const { loading, setLoading, setOrders, setMenu, setOriginalMenu } = useApp();
+
+  useEffect(() => {
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        console.log(currentPath);
+        if (!currentPath === "") return;
+        location.reload();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
+  }, []);
 
   useEffect(() => {
     async function fetchMenu() {
@@ -111,6 +130,14 @@ function App() {
   const ProtectedRoute = ({ user, setUser }) => {
     const [logout, setLogout] = useState(false);
 
+    useEffect(() => {
+      document.body.style.overflow = logout ? "hidden" : "visible";
+
+      return () => {
+        document.body.style.overflow = "visible";
+      };
+    }, [logout]);
+
     if (!user) return <Navigate to="/login" replace />;
     return (
       <>
@@ -149,6 +176,5 @@ function App() {
     </>
   );
 }
-
 
 export default App;

@@ -1,5 +1,6 @@
 import useGeolocation from "./customHook/useGeolocation";
 import { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import OrderCard from "./components/OrderCard";
 import { useApp } from "./context/useApp";
 import toast from "react-hot-toast";
@@ -10,12 +11,31 @@ const Home = () => {
 
   const { getPosition } = useGeolocation();
 
-  const { orders, setOrders } = useApp();
+  const { orders, setOrders, key, setKey } = useApp();
 
   const positionRef = useRef({
     Latitude: 0,
     Longitude: 0,
   });
+
+  const location = useLocation();
+  const currentPath = location.pathname.split("/")[1];
+
+  useEffect(() => {
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        console.log(currentPath);
+        if (!currentPath === "") return;
+        setKey((prevKey) => prevKey + 1);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchLocation = async () => {
@@ -83,7 +103,7 @@ const Home = () => {
   };
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container" key={key}>
       <div className="ui-head-title">
         <p>Dashboard</p>
       </div>

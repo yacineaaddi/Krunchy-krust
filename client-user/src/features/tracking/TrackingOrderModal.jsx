@@ -29,8 +29,7 @@ const TrackingOrderModal = ({ item }) => {
         <p className="tracking-name">Order Nº : {item.orderId}</p>
 
         <p className="tracking-order">{`${item?.Order?.map(
-          (item) =>
-            ` ${item?.Qty} ${item?.name} ${item?.completeMenu === true ? "Menu complete" : "SOLO"} `,
+          (item) => ` ${item?.Qty} ${item?.name}`,
         ).join(",")}`}</p>
       </div>
 

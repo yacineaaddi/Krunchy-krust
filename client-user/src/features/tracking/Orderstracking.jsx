@@ -3,10 +3,10 @@ import TrackingOrderModal from "./TrackingOrderModal";
 import Title from "../../components/Title";
 
 const Orderstracking = () => {
-  const { tracked } = useOutletContext();
+  const { tracked, key } = useOutletContext();
 
   return (
-    <div className="tracking-component">
+    <div className="tracking-component" key={key}>
       <Title>
         <p>Orders Tracking</p>
       </Title>

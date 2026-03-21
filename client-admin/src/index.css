@@ -68,7 +68,7 @@
     @apply mt-2 rounded-xl border-2 border-dashed border-cyan-300 px-3 py-2;
   }
   .Hours-intervals {
-    @apply flex gap-2 rounded-xl border-[1px] border-cyan-300 p-2;
+    @apply flex w-[100%] justify-between gap-2 rounded-xl border-[1px] border-cyan-300 p-2;
   }
   .Hours-dayname {
     @apply ml-2 font-bold capitalize text-green;
@@ -162,7 +162,7 @@
     @apply fixed bottom-0 left-0 right-0 z-40 max-h-fit w-full rounded-t-[43px] bg-primary py-2 lg:top-0 lg:mx-auto lg:mt-10 lg:w-2/4 lg:rounded-full;
   }
   .login-component {
-    @apply flex min-h-screen items-center justify-center overflow-hidden border-4 border-red-500 bg-cyan-300;
+    @apply flex min-h-screen items-center justify-center overflow-hidden bg-cyan-300;
   }
   .login-error {
     @apply mb-2 mt-6 text-center text-red-500;
@@ -213,7 +213,11 @@ html {
   scroll-behavior: smooth;
 }
 :root {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+  user-select: none; /* Standard */
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
 }
