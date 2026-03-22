@@ -1,6 +1,6 @@
 import { calculateAdditionalPrice } from "../../utils/calculateprice";
 import { calculateOrderPrice } from "../../utils/calculateprice";
-import { FreeMode, Thumbs, Scrollbar } from "swiper/modules";
+import { FreeMode, Thumbs, Scrollbar, Navigation } from "swiper/modules";
 import { handleAdditional } from "../../utils/updatecart";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { useOutletContext } from "react-router-dom";
@@ -10,6 +10,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { LuMinus } from "react-icons/lu";
 import { FiPlus } from "react-icons/fi";
 import "swiper/css";
+import "swiper/css/navigation";
 
 const CartItem = ({ item }) => {
   const { cart, wishlist, handleUpdate, setCart, setWishlist, groupedMenu } =
@@ -87,6 +88,7 @@ const CartItem = ({ item }) => {
 
             <div>
               <Swiper
+                navigation={true}
                 scrollbar={{
                   hide: false,
                 }}
@@ -94,7 +96,7 @@ const CartItem = ({ item }) => {
                 slidesPerView={2}
                 freeMode={true}
                 watchSlidesProgress={true}
-                modules={[FreeMode, Thumbs, Scrollbar]}
+                modules={[FreeMode, Thumbs, Scrollbar, Navigation]}
                 className="product-thumbs-swiper"
               >
                 {items?.map((currItem, index) => {

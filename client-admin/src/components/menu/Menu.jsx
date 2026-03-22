@@ -20,8 +20,8 @@ const Menu = () => {
         <p>Update Menu</p>
       </Title>
       {menu &&
-        Object.entries(groupedMenu).map(([category, items]) => (
-          <MenuModal category={category} items={items} key={category} />
+        Object.entries(groupedMenu).map(([category, item]) => (
+          <MenuModal category={category} item={item} key={category} />
         ))}
     </div>
   );

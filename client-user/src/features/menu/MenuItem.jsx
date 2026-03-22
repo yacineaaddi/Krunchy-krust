@@ -11,7 +11,7 @@ const MenuItem = ({ item }) => {
   const BASE_URL = import.meta.env.VITE_API_URL;
 
   return (
-    <div className="menuItem-box">
+    <div className="menuItem-box" id={item._id}>
       <div className="menuItem-image">
         <img
           src={`${BASE_URL}${item.image}`}
@@ -52,7 +52,7 @@ const MenuItem = ({ item }) => {
               )}
             </div>
             <div className="menuItem-status">
-              <p>{isInList(item, cart) ? "Remove from cart" : "Add to cart"}</p>
+              <p>{isInList(item, cart) ? "Remove" : "Add to cart"}</p>
             </div>
           </div>
         ) : (

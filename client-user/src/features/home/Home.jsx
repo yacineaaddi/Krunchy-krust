@@ -65,7 +65,7 @@ export default function Home() {
           {Dish?.map((item, index) => {
             const angle = index * angleStep;
             const baseTransform = `rotate(${angle}deg) translateY(-${
-              radius * (isMobile ? 0.9 : 1.6)
+              radius * (isMobile ? 0.8 : 1.4)
             }px) rotate(-${angle}deg)`;
 
             return (

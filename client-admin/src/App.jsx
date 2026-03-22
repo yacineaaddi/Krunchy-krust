@@ -16,7 +16,7 @@ import Loader from "./ui/Loader";
 import api from "./api/api";
 
 function App() {
-  const { loading, setLoading, setOrders, setMenu, setOriginalMenu } = useApp();
+  const { loading, setLoading, setOrders, setMenu, setTempMenu } = useApp();
 
   const alarm = new Audio("/sounds/Firebell.mp3");
 
@@ -33,7 +33,7 @@ function App() {
       try {
         const { data } = await api.get("/menu");
         setMenu(data);
-        setOriginalMenu(data);
+        setTempMenu(data);
       } catch (error) {
         toast.error(error.response?.data || error.message);
       }
@@ -85,22 +85,16 @@ function App() {
       setOrders((prev) => prev.filter((currEl) => currEl._id !== orderId));
     };
 
-    const handleUpdateMenu = (menu) => {
-      setMenu(menu);
-    };
-
     socket.emit("admin:join");
     socket.on("order:delete", handleDelete);
     socket.on("order:add", handleAdd);
     socket.on("order:update", handleUpdate);
-    socket.on("menu:update", handleUpdateMenu);
 
     return () => {
       socket.emit("admin:leave");
       socket.off("order:add");
       socket.off("order:update");
       socket.off("order:delete");
-      socket.off("menu:update");
     };
   }, []);
 

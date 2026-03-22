@@ -1,19 +1,39 @@
-import { useOutletContext, useNavigate } from "react-router-dom";
+import { useOutletContext, useNavigate, useLocation } from "react-router-dom";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { TiDeleteOutline } from "react-icons/ti";
 import { IoIosSearch } from "react-icons/io";
+import { useState, useEffect } from "react";
 import MenuItem from "./MenuItem";
-import { useState } from "react";
 
 const Menu = () => {
-  const { cart, groupedMenu } = useOutletContext();
+  const location = useLocation();
+  const navigate = useNavigate();
 
+  const targetId = location.state?.targetId;
+
+  const { cart, groupedMenu } = useOutletContext();
   const { Dish } = groupedMenu;
 
   const [search, setSearch] = useState("");
   const [results, setResults] = useState("");
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (!targetId) return;
+
+    const interval = setInterval(() => {
+      const element = document.getElementById(targetId);
+
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+        clearInterval(interval);
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [targetId]);
 
   const handleSearch = (e) => {
     const value = e.target.value;

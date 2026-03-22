@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import api from "../../api/api";
 
 const MenuModal = ({ category, items }) => {
-  const { menu, originalMenu, setOriginalMenu } = useApp();
+  const { menu, tempMenu, setTempMenu, setMenu } = useApp();
 
   const newItem = new Object({
     id: menu.length + 1,
@@ -39,13 +39,16 @@ const MenuModal = ({ category, items }) => {
       default:
         return;
     }
-    if (JSON.stringify(originalMenu) === JSON.stringify(updatedMenu)) {
+
+    if (JSON.stringify(tempMenu) === JSON.stringify(updatedMenu)) {
       toast.error("Please update menu");
       return;
     }
-    setOriginalMenu(updatedMenu);
+
     try {
-      await api.post("admin/menu", updatedMenu);
+      const newMenu = await api.post("admin/menu", updatedMenu);
+      setMenu(newMenu.data);
+      setTempMenu(newMenu.data);
       toast.success("Menu updated successfully");
     } catch (error) {
       toast.error(error.response?.data || error.message);

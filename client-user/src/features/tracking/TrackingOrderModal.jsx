@@ -28,9 +28,21 @@ const TrackingOrderModal = ({ item }) => {
       <div className="tracking-info">
         <p className="tracking-name">Order Nº : {item.orderId}</p>
 
-        <p className="tracking-order">{`${item?.Order?.map(
-          (item) => ` ${item?.Qty} ${item?.name}`,
-        ).join(",")}`}</p>
+        <div className="tracking-order">
+          {item?.Order?.map((item) => (
+            <p>
+              {item?.Qty} {item?.name}
+            </p>
+          ))}
+
+          {item?.Order.map((item) =>
+            item.additional?.map((add, index) => (
+              <p key={index}>
+                {add.Qty} {add.name}
+              </p>
+            )),
+          )}
+        </div>
       </div>
 
       <div className="tracking-status">

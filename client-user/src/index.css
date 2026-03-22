@@ -27,7 +27,7 @@ div {
     @apply flex w-full flex-col items-center justify-center gap-5 rounded-3xl p-4 lg:flex-row;
   }
   .tracking-order {
-    @apply w-fit text-center font-[400] text-black;
+    @apply flex w-fit flex-col gap-2 text-center font-[400] text-black;
   }
   .tracking-name {
     @apply w-fit font-bold text-green;
@@ -171,10 +171,10 @@ div {
     @apply absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center;
   }
   .home-circle-container {
-    @apply pointer-events-none absolute left-1/2 top-1/2 flex h-[366px] w-[366px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border-2 border-cyan-100 sm:h-[580px] sm:w-[580px] md:h-[600px] md:w-[600px];
+    @apply pointer-events-none absolute left-1/2 top-1/2 flex h-[333px] w-[333px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border-2 border-cyan-100 sm:h-[580px] sm:w-[580px] md:h-[550px] md:w-[550px];
   }
   .home-cirleItems {
-    @apply relative flex h-[82px] w-[82px] cursor-pointer items-center justify-center overflow-hidden rounded-full border-[1px] border-cyan-100 shadow-md transition-transform hover:scale-[1.1] sm:h-28 sm:w-28 md:h-32 md:w-32;
+    @apply relative flex h-[82px] w-[82px] cursor-pointer items-center justify-center overflow-hidden rounded-full border-[1px] border-cyan-100 shadow-md sm:h-28 sm:w-28 md:h-32 md:w-32;
   }
   .home-circle {
     @apply absolute left-1/2 top-1/2 cursor-grab;
@@ -312,4 +312,20 @@ html {
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
   user-select: none; /* Standard */
+}
+.swiper-button-next {
+  color: #00979e !important;
+  width: 13px;
+  padding-left: 5px;
+}
+
+.swiper-button-prev {
+  color: #00979e !important;
+  width: 13px;
+  padding-right: 5px;
+}
+
+.swiper-button-disabled {
+  opacity: 0 !important;
+  pointer-events: none;
 }

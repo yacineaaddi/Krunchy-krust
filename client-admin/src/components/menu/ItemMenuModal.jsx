@@ -13,7 +13,7 @@ const ItemMenuModal = ({ item, handleSave }) => {
 
   const BASE_URL = import.meta.env.VITE_API_URL;
 
-  const { setMenu } = useApp();
+  const { setMenu, setTempMenu } = useApp();
 
   async function handleImageChange(e) {
     e.preventDefault();
@@ -27,11 +27,13 @@ const ItemMenuModal = ({ item, handleSave }) => {
     try {
       const { data } = await api.put(`/menu/${id}/image`, formData);
 
-      setMenu((prevMenu) =>
+      const updateMenuImages = (prevMenu) =>
         prevMenu.map((m) =>
           m._id === id ? { ...m, image: `/uploads/${data}` } : m,
-        ),
-      );
+        );
+
+      setMenu(updateMenuImages);
+      setTempMenu(updateMenuImages);
 
       toast.success("Image updated successfully");
     } catch (error) {

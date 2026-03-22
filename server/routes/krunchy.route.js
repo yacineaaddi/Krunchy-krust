@@ -59,7 +59,7 @@ router.post("/admin/menu", protect, requireAdmin, async (req, res) => {
       { new: true, upsert: true },
     );
     //io.emit("order:updateMenu", menu.items);
-    io.to("admin").emit("menu:update", menu.items);
+    //io.to("admin").emit("menu:update", menu.items);
     io.emit("order:updateMenu", menu.items);
     res.json(menu.items);
   } catch (error) {
@@ -67,7 +67,7 @@ router.post("/admin/menu", protect, requireAdmin, async (req, res) => {
   }
 });
 //Route for registring driver and admin * change role before register
-router.post("/register", async (req, res) => {
+/*router.post("/register", async (req, res) => {
   const { username, password } = req.body;
   try {
     if (!username || !password) {
@@ -81,12 +81,12 @@ router.post("/register", async (req, res) => {
     const user = await User.create({ username, password, role: "admin" });
 
     const raw = await User.findById(user._id).lean();
-    /*const token = generateToken(user._id, user.role);*/
+    //const token = generateToken(user._id, user.role);
     res.status(201).json({ id: user._id, username: user.username });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-});
+});*/
 //Route for login - Driver
 router.post("/login/driver", async (req, res) => {
   const { username, password } = req.body;

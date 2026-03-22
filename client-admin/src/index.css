@@ -152,6 +152,9 @@
   .logout-button {
     @apply cursor-pointer rounded-xl px-6 py-2 text-white;
   }
+  .logout-box {
+    @apply flex h-[260px] w-[85%] flex-col items-center gap-8 rounded-xl bg-white p-6 lg:w-[30%];
+  }
   .logout-component {
     @apply fixed z-[50] flex h-[100dvh] w-full items-center justify-center bg-gray-800 bg-opacity-80;
   }
