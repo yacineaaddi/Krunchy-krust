@@ -4,7 +4,7 @@ import { FaPlus } from "react-icons/fa6";
 import toast from "react-hot-toast";
 import api from "../../api/api";
 
-const MenuModal = ({ category, items }) => {
+const MenuModal = ({ category, item }) => {
   const { menu, tempMenu, setTempMenu, setMenu } = useApp();
 
   const newItem = new Object({
@@ -58,7 +58,7 @@ const MenuModal = ({ category, items }) => {
   return (
     <div className="Menu-container">
       <div className="Menu-Categoryname">{category}</div>
-      {items.map((item) => (
+      {item.map((item) => (
         <ItemMenuModal item={item} key={item._id} handleSave={handleSave} />
       ))}
       <div data-type="newItem" onClick={handleSave} className="Menu-newItem">
