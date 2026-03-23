@@ -1,10 +1,10 @@
 import { Route, Navigate, Outlet, Routes } from "react-router-dom";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { BrowserRouter } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Logout from "./components/logout/Logout";
 import Hours from "./components/hours/Hours";
 import Login from "./components/login/Login";
-import { useState, useEffect } from "react";
 import Home from "./components/home/Home";
 import { useApp } from "./context/useApp";
 import Menu from "./components/menu/Menu";
@@ -13,19 +13,89 @@ import { socket } from "./socket/socket";
 import NotFound from "./ui/NotFound";
 import toast from "react-hot-toast";
 import Loader from "./ui/Loader";
+import { App } from "@capacitor/app";
 import api from "./api/api";
 
-function App() {
+function ReactApp() {
   const { loading, setLoading, setOrders, setMenu, setTempMenu } = useApp();
 
-  const alarm = new Audio("/sounds/Firebell.mp3");
+  const [isLoading, setIsLoading] = useState(true);
+  const lastRunRef = useRef(0);
+  const abortRef = useRef(null);
 
-  const storedId = localStorage.getItem("user");
+  const alarm = new Audio("/sounds/Firebell.mp3");
 
   const [user, setUser] = useState(() => {
     const stored = localStorage.getItem("user");
     return stored ? stored : null;
   });
+
+  const storedId = localStorage.getItem("user");
+
+  const fetchData = useCallback(async () => {
+    console.log("fetched data is called");
+    try {
+      abortRef.current?.abort();
+      abortRef.current = new AbortController();
+
+      const user = localStorage.getItem("user");
+      if (!user) return;
+
+      const res = await api.get("/orders", {
+        signal: abortRef.current.signal,
+      });
+
+      console.log(res.data);
+
+      setOrders((prev) => {
+        if (JSON.stringify(res.data) !== JSON.stringify(prev)) return res.data;
+        return prev;
+      });
+
+      setIsLoading(false);
+    } catch (error) {
+      if (error.name === "CanceledError") return;
+      console.error(error.response?.data?.message || error.message);
+    }
+  }, [setOrders]);
+
+  useEffect(() => {
+    let isMounted = true;
+    let listener;
+    const handleVisibility = (state) => {
+      if (!isMounted) return;
+      console.log("handle visibility is called");
+      const now = Date.now();
+
+      if (now - lastRunRef.current < 300) return;
+      lastRunRef.current = now;
+
+      const isVisible =
+        document.visibilityState === "visible" || state?.isActive === true;
+
+      if (!isVisible) return;
+
+      fetchData();
+    };
+    const init = async () => {
+      listener = await App.addListener("appStateChange", handleVisibility);
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+    //const removeListener = App.addListener("appStateChange", handleVisibility);
+    init();
+    return () => {
+      isMounted = false;
+      document.removeEventListener("visibilitychange", handleVisibility);
+      listener?.remove();
+      abortRef.current?.abort();
+    };
+  }, []);
+
+  useEffect(() => {
+    const id = setTimeout(fetchData, 0);
+
+    return () => clearTimeout(id);
+  }, [fetchData, user]);
 
   useEffect(() => {
     async function fetchMenu() {
@@ -125,7 +195,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<ProtectedRoute user={user} setUser={setUser} />}>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home isLoading={isLoading} />} />
             <Route path="/hours" element={<Hours />} />
             <Route path="/menu" element={<Menu />} />
           </Route>
@@ -142,10 +212,10 @@ function App() {
             }
           />
           <Route path="*" element={<NotFound />} />
-        </Routes>{" "}
+        </Routes>
       </BrowserRouter>
     </>
   );
 }
 
-export default App;
+export default ReactApp;

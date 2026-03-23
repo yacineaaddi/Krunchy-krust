@@ -1,40 +1,87 @@
+import { useEffect, useRef, useState, useCallback } from "react";
 import useGeolocation from "./customHook/useGeolocation";
-import { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
 import OrderCard from "./components/OrderCard";
 import { useApp } from "./context/useApp";
+import { App } from "@capacitor/app";
 import toast from "react-hot-toast";
 import api from "./api/api";
 
 const Home = () => {
+  const lastRunRef = useRef(0);
+  const abortRef = useRef(null);
+
   const [isLoading, setIsLoading] = useState(true);
 
   const { getPosition } = useGeolocation();
 
-  const { orders, setOrders, key, setKey } = useApp();
+  const { orders, setOrders, key } = useApp();
 
   const positionRef = useRef({
     Latitude: 0,
     Longitude: 0,
   });
 
-  const location = useLocation();
-  const currentPath = location.pathname.split("/")[1];
+  const fetchData = useCallback(async () => {
+    try {
+      abortRef.current?.abort();
+      abortRef.current = new AbortController();
+
+      const user = localStorage.getItem("user");
+      if (!user) return;
+
+      const res = await api.get("/orders", {
+        signal: abortRef.current.signal,
+      });
+
+      setOrders((prev) => {
+        if (JSON.stringify(res.data) !== JSON.stringify(prev)) return res.data;
+        return prev;
+      });
+
+      setIsLoading(false);
+    } catch (error) {
+      if (error.name === "CanceledError") return;
+      console.error(error.response?.data?.message || error.message);
+    }
+  }, [setOrders]);
 
   useEffect(() => {
-    const handleVisibility = () => {
-      if (document.visibilityState === "visible") {
-        if (!currentPath === "") return;
-        setKey((prevKey) => prevKey + 1);
-      }
+    let isMounted = true;
+    let listener;
+    const handleVisibility = (state) => {
+      if (!isMounted) return;
+      const now = Date.now();
+
+      if (now - lastRunRef.current < 300) return;
+      lastRunRef.current = now;
+
+      const isVisible =
+        document.visibilityState === "visible" || state?.isActive === true;
+
+      if (!isVisible) return;
+
+      fetchData();
     };
 
+    const init = async () => {
+      listener = await App.addListener("appStateChange", handleVisibility);
+    };
     document.addEventListener("visibilitychange", handleVisibility);
+    init();
 
     return () => {
+      isMounted = false;
       document.removeEventListener("visibilitychange", handleVisibility);
+      listener?.remove();
+      abortRef.current?.abort();
     };
-  }, []);
+  }, [fetchData]);
+
+  useEffect(() => {
+    const id = setTimeout(fetchData, 0);
+
+    return () => clearTimeout(id);
+  }, [fetchData]);
 
   useEffect(() => {
     const fetchLocation = async () => {
@@ -77,7 +124,7 @@ const Home = () => {
 
     return () => clearInterval(interval);
   }, [orders]);
-
+  /*
   useEffect(() => {
     const fetchData = async () => {
       const user = localStorage.getItem("user");
@@ -94,7 +141,7 @@ const Home = () => {
       }
     };
     fetchData();
-  }, []);
+  }, []);*/
 
   const getLocation = (item) => {
     const mapUrl = `https://www.google.com/maps?q=${item.location.coordinates[1]},${item.location.coordinates[0]}`;
