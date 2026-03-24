@@ -81,16 +81,24 @@ const AppLayout = () => {
   }, []);
 
   const fetchTrackedOrders = useCallback(async () => {
-    if (trackedIds == undefined && trackedIds == null) return;
+    if (!trackedIds || trackedIds.length === 0) return;
 
     try {
       const res = await api.post("/myorders", {
         trackedIds,
       });
 
+      const newIds = res.data.map((el) => el._id);
+
       setTracked((prev) => {
         if (JSON.stringify(res.data) !== JSON.stringify(prev)) return res.data;
         return prev;
+      });
+
+      setTrackedIds((prev) => {
+        const updated = prev.filter((id) => newIds.includes(id));
+        localStorage.setItem("trackedIds", JSON.stringify(updated));
+        return updated;
       });
     } catch (error) {
       if (error.name === "CanceledError") return;
