@@ -86,7 +86,7 @@ const OrderCard = ({ item, getLocation }) => {
           </div>
           <div className="order-state">
             <p className="text-center font-semibold">
-              {deliveryStates[item.status]}
+              {item?.status && deliveryStates[item.status]}
             </p>
           </div>
           <div className="decision-container">

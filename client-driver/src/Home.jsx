@@ -14,7 +14,7 @@ const Home = () => {
 
   const { getPosition } = useGeolocation();
 
-  const { orders, setOrders, key } = useApp();
+  const { orders, setOrders } = useApp();
 
   const positionRef = useRef({
     Latitude: 0,
@@ -149,7 +149,7 @@ const Home = () => {
   };
 
   return (
-    <div className="dashboard-container" key={key}>
+    <div className="dashboard-container">
       <div className="ui-head-title">
         <p>Dashboard</p>
       </div>

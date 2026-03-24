@@ -1,11 +1,11 @@
 import LogoutButton from "./ui/LogoutButton";
-import NotFound from "./ui/NotFound";
 import { useState, useEffect } from "react";
 import { useApp } from "./context/useApp";
 import { Toaster } from "react-hot-toast";
 import Loader from "./components/Loader";
 import { socket } from "./socket/socket";
 import Login from "./components/Login";
+import NotFound from "./ui/NotFound";
 import Logout from "./ui/Logout";
 import api from "./api/api";
 import Home from "./Home";
