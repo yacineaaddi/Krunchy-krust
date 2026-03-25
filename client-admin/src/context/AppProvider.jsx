@@ -2,7 +2,6 @@ import { useState, useMemo } from "react";
 import { AppContext } from "./AppContext";
 
 const AppProvider = ({ children }) => {
-  const [key, setKey] = useState(0);
   const [menu, setMenu] = useState([]);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -18,10 +17,8 @@ const AppProvider = ({ children }) => {
       setMenu,
       tempMenu,
       setTempMenu,
-      key,
-      setKey,
     }),
-    [orders, loading, menu, tempMenu, key, setKey],
+    [orders, loading, menu, tempMenu],
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

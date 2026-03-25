@@ -26,13 +26,12 @@ const OrderCard = ({ item, getLocation }) => {
         payload,
       });
 
-      const order = data.order;
       setOrders((prev) => {
         const updated = prev.map((currEl) =>
           orderId === currEl._id
             ? {
                 ...currEl,
-                status: order.status,
+                status: data.status,
               }
             : currEl,
         );

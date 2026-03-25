@@ -10,26 +10,24 @@ import api from "../../api/api";
 const OrderCard = ({ item, getLocation }) => {
   const [selected, setSelected] = useState(null);
   const { setOrders } = useApp();
-
+  console.log(item);
   const updateOrder = async (orderId, action) => {
-    const payload = { action };
-
-    if (selected !== undefined && selected !== null) {
-      payload.reject_message = selected.value;
-    }
-
     try {
+      const payload = { action };
+
+      if (selected !== undefined && selected !== null) {
+        payload.reject_message = selected.value;
+      }
       const { data } = await api.put(`/${orderId}/admin-transition`, {
         payload,
       });
-      const order = data;
 
       setOrders((prev) => {
         const updated = prev.map((currEl) =>
           orderId === currEl._id
             ? {
                 ...currEl,
-                status: order.status,
+                status: data.status,
               }
             : currEl,
         );

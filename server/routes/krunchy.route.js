@@ -211,7 +211,7 @@ router.post("/refresh", async (req, res) => {
 
     res
       .cookie("accessToken", newAccessToken, {
-        //secure: false,  important for localhost
+        //secure: false, //important for localhost
         //sameSite: "lax", // works with localhost ports
         httpOnly: true,
         path: "/",
@@ -345,7 +345,7 @@ router.put(
 
       io.to("driver").emit("order:add", order);
 
-      res.status(200).json({ order });
+      res.status(200).json(order);
     } catch (err) {
       console.error("Admin transition error:", err);
       return res.status(500).json({ message: err.message });
@@ -437,7 +437,7 @@ router.put(
       io.to(`order:${order._id}`).emit("order:update", order);
       io.to("admin").emit("order:update", order);
 
-      res.status(200).json({ order });
+      res.status(200).json(order);
     } catch (err) {
       console.error("Driver transition error:", err);
       return res.status(500).json({ message: err.message });

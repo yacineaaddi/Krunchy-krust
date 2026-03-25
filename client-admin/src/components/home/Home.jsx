@@ -3,7 +3,7 @@ import OrderCard from "./OrderCard";
 import Title from "../../ui/Title";
 
 const Home = ({ isLoading }) => {
-  const { orders, key } = useApp();
+  const { orders } = useApp();
 
   const getLocation = (item) => {
     const mapUrl = `https://www.google.com/maps?q=${item.location.coordinates[1]},${item.location.coordinates[0]}`;
@@ -11,7 +11,7 @@ const Home = ({ isLoading }) => {
   };
 
   return (
-    <div className="orders-component" key={key}>
+    <div className="orders-component">
       <Title>
         <p>Current Orders</p>
       </Title>
