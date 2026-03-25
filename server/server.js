@@ -48,8 +48,6 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log("Client connected:", socket.id);
-
   // Order rooms
   socket.on("order:join", (orderId) => {
     socket.join(`order:${orderId}`);
@@ -79,8 +77,7 @@ io.on("connection", (socket) => {
     socket.leave("driver");
   });
 
-  socket.on("disconnect", () => {
-  });
+  socket.on("disconnect", () => {});
 });
 
 const PORT = process.env.PORT || 5000;

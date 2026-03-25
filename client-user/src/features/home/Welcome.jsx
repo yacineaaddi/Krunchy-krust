@@ -13,8 +13,6 @@ const Welcome = () => {
     [availableHours, now],
   );
 
-  console.log("welcome rendred");
-
   useEffect(() => {
     const interval = setInterval(() => {
       setNow(Date.now());
@@ -22,8 +20,6 @@ const Welcome = () => {
 
     return () => clearInterval(interval);
   }, []);
-
-  console.log(AvailableStatus);
 
   const { isOpen, openTime, closeTime } = AvailableStatus;
 

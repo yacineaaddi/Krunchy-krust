@@ -29,8 +29,7 @@ export async function CreateOrderAction({ request }) {
       localStorage.removeItem("trackedIds");
       parsed = [];
     }
-    console.log(parsed);
-    console.log(res.data._id);
+
     const updated = [...parsed, res.data._id];
 
     localStorage.setItem("trackedIds", JSON.stringify(updated));

@@ -33,7 +33,6 @@ function ReactApp() {
   const storedId = localStorage.getItem("user");
 
   const fetchData = useCallback(async () => {
-    console.log("fetched data is called");
     try {
       abortRef.current?.abort();
       abortRef.current = new AbortController();
@@ -44,8 +43,6 @@ function ReactApp() {
       const res = await api.get("/orders", {
         signal: abortRef.current.signal,
       });
-
-      console.log(res.data);
 
       setOrders((prev) => {
         if (JSON.stringify(res.data) !== JSON.stringify(prev)) return res.data;
@@ -64,7 +61,6 @@ function ReactApp() {
     let listener;
     const handleVisibility = (state) => {
       if (!isMounted) return;
-      console.log("handle visibility is called");
       const now = Date.now();
 
       if (now - lastRunRef.current < 300) return;
@@ -124,7 +120,6 @@ function ReactApp() {
       } catch (error) {
         setUser(null);
         localStorage.removeItem("user");
-        console.log("error", error.message);
       } finally {
         setLoading(false);
       }

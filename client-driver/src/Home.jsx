@@ -101,10 +101,9 @@ const Home = () => {
         prev.Latitude !== coords.latitude ||
         prev.Longitude !== coords.longitude;
 
-      /*if (!hasChanged) {
-        console.log("returned");
+      if (!hasChanged) {
         return;
-      }*/
+      }
 
       const newPosition = {
         Latitude: coords.latitude,

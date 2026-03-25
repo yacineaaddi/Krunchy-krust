@@ -97,6 +97,11 @@ const AppLayout = () => {
 
       setTrackedIds((prev) => {
         const updated = prev.filter((id) => newIds.includes(id));
+
+        if (updated.length === prev.length) {
+          return prev;
+        }
+
         localStorage.setItem("trackedIds", JSON.stringify(updated));
         return updated;
       });

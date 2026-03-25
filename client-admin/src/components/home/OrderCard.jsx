@@ -42,7 +42,6 @@ const OrderCard = ({ item, getLocation }) => {
     }
   };
   const [Element] = item.Order;
-  console.log();
   return (
     <>
       <div className="order-container">

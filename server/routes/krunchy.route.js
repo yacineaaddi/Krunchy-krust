@@ -273,7 +273,6 @@ router.get("/orders", protect, async (req, res) => {
     const Orders = await NewOrder.find();
     res.json(Orders);
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: error.message });
   }
 });
@@ -428,7 +427,6 @@ router.put(
           );
           return res.status(200).json({ order });
         } catch (error) {
-          console.log(error);
           res.status(500).json({ message: error.message });
         }
       }
