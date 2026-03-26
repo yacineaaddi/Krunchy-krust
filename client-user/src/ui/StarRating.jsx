@@ -2,8 +2,8 @@ import PropTypes from "prop-types";
 
 const containerStyle = {
   display: "flex",
-  alignItem: "center",
-  justifyContent: "center",
+  // alignItem: "center",
+  //justifyContent: "center",
 };
 
 const starContainerStyle = {

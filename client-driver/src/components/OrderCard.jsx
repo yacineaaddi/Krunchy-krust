@@ -22,17 +22,16 @@ const OrderCard = ({ item, getLocation }) => {
       if (paid !== undefined && paid !== null) {
         payload.paid = paid;
       }
-      const { data } = await api.put(`/${orderId}/driver-transition`, {
+      const data = await api.put(`/${orderId}/driver-transition`, {
         payload,
       });
 
-      const order = data.order;
       setOrders((prev) => {
         const updated = prev.map((currEl) =>
           orderId === currEl._id
             ? {
                 ...currEl,
-                status: order.status,
+                status: data.status,
               }
             : currEl,
         );

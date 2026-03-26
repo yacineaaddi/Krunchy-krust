@@ -12,6 +12,7 @@ const OrderCard = ({ item, getLocation }) => {
   const { setOrders } = useApp();
   console.log(item);
   const updateOrder = async (orderId, action) => {
+    console.log(orderId, action);
     try {
       const payload = { action };
 
@@ -21,7 +22,6 @@ const OrderCard = ({ item, getLocation }) => {
       const { data } = await api.put(`/${orderId}/admin-transition`, {
         payload,
       });
-
       setOrders((prev) => {
         const updated = prev.map((currEl) =>
           orderId === currEl._id

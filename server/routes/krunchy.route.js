@@ -417,15 +417,15 @@ router.put(
 
           setTimeout(
             async () => {
-              await NewOrder.findByIdAndDelete(orderId);
+              await NewOrder.findByIdAndDelete(order._id);
 
-              io.to(`order:${orderId}`).emit("order:delete", orderId);
+              io.to(`order:${orderId}`).emit("order:delete", order);
               io.to("admin").emit("order:delete", orderId);
               io.to("driver").emit("order:delete", orderId);
             },
             5 * 60 * 1000,
           );
-          return res.status(200).json({ order });
+          return res.status(200).json(order);
         } catch (error) {
           res.status(500).json({ message: error.message });
         }
