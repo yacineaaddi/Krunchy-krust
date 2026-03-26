@@ -26,12 +26,13 @@ const OrderCard = ({ item, getLocation }) => {
         payload,
       });
 
+      const order = data.order;
       setOrders((prev) => {
         const updated = prev.map((currEl) =>
           orderId === currEl._id
             ? {
                 ...currEl,
-                status: data.status,
+                status: order.status,
               }
             : currEl,
         );
@@ -73,7 +74,8 @@ const OrderCard = ({ item, getLocation }) => {
                 Out for delivery
               </button>
             )}
-            {item.status === "OUT_FOR_DELIVERY" && (
+
+            {item.status === "NEAR_ME" && (
               <div className="delivery-box">
                 <label htmlFor="address" className="input-label">
                   Paid price :

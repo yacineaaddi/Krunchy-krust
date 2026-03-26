@@ -111,7 +111,7 @@ const Home = () => {
       };
 
       positionRef.current = newPosition;
-
+      console.log("newPosition", newPosition);
       try {
         await api.post("/setLocation", newPosition);
       } catch (error) {
@@ -123,24 +123,6 @@ const Home = () => {
 
     return () => clearInterval(interval);
   }, [orders]);
-  /*
-  useEffect(() => {
-    const fetchData = async () => {
-      const user = localStorage.getItem("user");
-      if (!user) return;
-      try {
-        const res = await api.get("/orders");
-
-        if (JSON.stringify(res.data) !== JSON.stringify(orders)) {
-          setOrders(res.data);
-        }
-        setIsLoading(false);
-      } catch (error) {
-        toast.error(error.response?.data?.message || error.message);
-      }
-    };
-    fetchData();
-  }, []);*/
 
   const getLocation = (item) => {
     const mapUrl = `https://www.google.com/maps?q=${item.location.coordinates[1]},${item.location.coordinates[0]}`;
@@ -158,9 +140,13 @@ const Home = () => {
         <div className="order-full">
           {orders
             ?.filter((item) =>
-              ["CONFIRMED", "READY", "OUT_FOR_DELIVERY", "DELIVERED"].includes(
-                item.status,
-              ),
+              [
+                "CONFIRMED",
+                "READY",
+                "OUT_FOR_DELIVERY",
+                "DELIVERED",
+                "NEAR_ME",
+              ].includes(item.status),
             )
             .slice()
             .reverse()

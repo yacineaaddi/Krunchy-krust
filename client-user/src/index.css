@@ -24,7 +24,7 @@ div {
     @apply w-[80%] self-center text-center font-semibold text-green;
   }
   .tracking-status {
-    @apply flex w-full flex-col items-center justify-center gap-5 rounded-3xl p-4 lg:flex-row;
+    @apply flex w-full flex-col items-center justify-center gap-8 rounded-3xl p-4;
   }
   .tracking-order {
     @apply flex w-fit flex-col gap-2 text-center font-[400] text-black;

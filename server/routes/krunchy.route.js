@@ -423,7 +423,7 @@ router.put(
               io.to("admin").emit("order:delete", orderId);
               io.to("driver").emit("order:delete", orderId);
             },
-            1 * 60 * 1000,
+            5 * 60 * 1000,
           );
           return res.status(200).json({ order });
         } catch (error) {
@@ -446,7 +446,7 @@ router.put(
 );
 //Route for updating driver location - Driver
 router.post("/setLocation", protect, requireDriver, async (req, res) => {
-  const { latitude, longitude } = req.body;
+  const { Latitude, Longitude } = req.body;
 
   try {
     const orders = await NewOrder.find({ status: "OUT_FOR_DELIVERY" });
@@ -455,8 +455,8 @@ router.post("/setLocation", protect, requireDriver, async (req, res) => {
       const [orderLng, orderLat] = order.location.coordinates;
 
       const distance = getDistanceInMeters(
-        latitude,
-        longitude,
+        Latitude,
+        Longitude,
         orderLat,
         orderLng,
       );
@@ -464,7 +464,7 @@ router.post("/setLocation", protect, requireDriver, async (req, res) => {
       // send driver location update
       io.to(`order:${order._id}`).emit("order:driverLocation", req.body);
 
-      if (distance <= 100 && order.status === "OUT_FOR_DELIVERY") {
+      if (distance <= 150 && order.status === "OUT_FOR_DELIVERY") {
         order.status = "NEAR_ME";
         await order.save();
         io.to("admin").emit("order:update", order);
