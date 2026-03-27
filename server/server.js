@@ -20,18 +20,32 @@ const allowedOrigins = process.env.FRONT_END_URLs.split(",")
 
 app.use(
   cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        console.log("Blocked origin:", origin);
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  }),
+);
+/*
+app.use(
+  cors({
     origin: allowedOrigins,
     credentials: true,
   }),
 );
-
+*/
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 app.use(cookieParser());
 
 app.use("/", router);
-
-app.options("*", cors());
 
 app.use((err, res) => {
   console.error(err.stack);
