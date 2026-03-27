@@ -486,6 +486,7 @@ router.post("/feedback", async (req, res) => {
   const chatId = process.env.CHAT_ID;
 
   try {
+    const order = await NewOrder.findById(orderId);
     await NewOrder.findByIdAndDelete(orderId);
 
     try {
@@ -498,10 +499,11 @@ router.post("/feedback", async (req, res) => {
         text: newMessage,
       });
 
-      io.to(`order:${orderId}`).emit("order:delete", orderId);
-
+      io.to(`order:${orderId}`).emit("order:delete", order);
       io.to("driver").emit("order:delete", orderId);
       io.to("admin").emit("order:delete", orderId);
+
+      res.status(200).json({ ok: true });
     } catch (error) {
       console.error("Save error:", error);
       res.status(500).json({ message: error.message });

@@ -20,32 +20,10 @@ const allowedOrigins = process.env.FRONT_END_URLs.split(",")
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      } else {
-        console.log("Blocked origin:", origin);
-        return callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  }),
-);
-/*
-app.use(
-  cors({
     origin: allowedOrigins,
     credentials: true,
   }),
 );
-*/
-
-app.use((req, res, next) => {
-  console.log("Origin received:", req.headers.origin);
-  next();
-});
 
 app.use(express.json());
 
@@ -57,6 +35,11 @@ app.use((err, res) => {
   console.error(err.stack);
   res.status(500).json({ message: err.message });
 });
+app.use((req, res, next) => {
+  console.log("Origin received:", req.headers.origin);
+  next();
+});
+
 app.use("/", router);
 
 const server = http.createServer(app);
