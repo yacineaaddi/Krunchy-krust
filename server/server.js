@@ -30,17 +30,18 @@ app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
 app.use(cookieParser());
-
-app.use((err, res) => {
-  console.error(err.stack);
-  res.status(500).json({ message: err.message });
-});
+/*
 app.use((req, res, next) => {
   console.log("Origin received:", req.headers.origin);
   next();
 });
-
+*/
 app.use("/", router);
+
+app.use((err, req, res, next) => {
+  console.error("ERROR:", err.stack);
+  res.status(500).json({ message: err.message });
+});
 
 const server = http.createServer(app);
 
