@@ -41,16 +41,23 @@ app.use(
   }),
 );
 */
-app.use(express.json());
-app.use("/uploads", express.static("uploads"));
-app.use(cookieParser());
 
-app.use("/", router);
+app.use((req, res, next) => {
+  console.log("Origin received:", req.headers.origin);
+  next();
+});
+
+app.use(express.json());
+
+app.use("/uploads", express.static("uploads"));
+
+app.use(cookieParser());
 
 app.use((err, res) => {
   console.error(err.stack);
   res.status(500).json({ message: err.message });
 });
+app.use("/", router);
 
 const server = http.createServer(app);
 
@@ -59,11 +66,6 @@ const io = new Server(server, {
     origin: allowedOrigins,
     credentials: true,
   },
-});
-
-app.use((req, res, next) => {
-  console.log("Origin received:", req.headers.origin);
-  next();
 });
 
 io.on("connection", (socket) => {
