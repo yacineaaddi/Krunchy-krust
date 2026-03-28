@@ -1,14 +1,14 @@
 import deliveryStates from "../../data/deliveryStates";
-import rejectOptions from "../../data/rejectOptions";
-import customStyles from "../../ui/customStyles";
+//import rejectOptions from "../../data/rejectOptions";
+//import customStyles from "../../ui/customStyles";
 import { useApp } from "../../context/useApp";
 import toast from "react-hot-toast";
 import Select from "react-select";
-import { useState } from "react";
+//import { useState } from "react";
 import api from "../../api/api";
 
 const OrderCard = ({ item, getLocation }) => {
-  const [selected, setSelected] = useState(null);
+  //const [selected, setSelected] = useState(null);
   const { setOrders } = useApp();
   console.log(item);
   const updateOrder = async (orderId, action) => {
@@ -16,9 +16,9 @@ const OrderCard = ({ item, getLocation }) => {
     try {
       const payload = { action };
 
-      if (selected !== undefined && selected !== null) {
+      /*if (selected !== undefined && selected !== null) {
         payload.reject_message = selected.value;
-      }
+      }*/
       const { data } = await api.put(`/${orderId}/admin-transition`, {
         payload,
       });
@@ -74,7 +74,7 @@ const OrderCard = ({ item, getLocation }) => {
                   .map(
                     (currEl) =>
                       `
-                    ${currEl.Qty} ${currEl.category} ${currEl.name}
+                    ${currEl.Qty} ${currEl.name}
                   `,
                   )
                   .join("-")}
@@ -95,8 +95,16 @@ const OrderCard = ({ item, getLocation }) => {
                 Order is Ready
               </button>
             )}
-
             {item.status === "PLACED" && (
+              <button
+                onClick={() => updateOrder(item._id, "CONFIRMED")}
+                className="ready-button"
+              >
+                Accept
+              </button>
+            )}
+
+            {/*item.status === "PLACED" && (
               <div className="decision-box">
                 <div className="select-box">
                   <Select
@@ -123,7 +131,7 @@ const OrderCard = ({ item, getLocation }) => {
                   </button>
                 </div>
               </div>
-            )}
+            )*/}
           </div>
         </div>
       </div>

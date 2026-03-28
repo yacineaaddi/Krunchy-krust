@@ -12,7 +12,7 @@ div {
     @apply z-[1] flex w-full flex-col gap-5;
   }
   .trackingbox-submit {
-    @apply mt-4 flex w-fit cursor-pointer flex-row items-center justify-center gap-4 self-end rounded-xl border-2 border-cyan-300 bg-white px-4 py-2 text-lg font-semibold text-cyan-300 lg:mr-[0%] lg:self-center;
+    @apply mt-4 flex w-fit cursor-pointer items-center justify-center gap-4 self-end rounded-full bg-cyan-100 px-4 py-2 text-lg font-semibold text-white lg:mr-[0%] lg:self-center;
   }
   .trackingbox-rate-input {
     @apply w-full rounded-full border border-cyan-100 px-4 py-2 accent-cyan-300 outline-cyan-200;
@@ -36,13 +36,13 @@ div {
     @apply flex w-[88%] flex-col items-center justify-center gap-3 py-3 font-semibold text-white;
   }
   .tracking-modal {
-    @apply flex w-[85%] flex-col items-center gap-5 rounded-3xl border-[1px] border-gray-400 bg-white py-4 pb-8 pt-8 md:w-[75%] lg:w-[80%];
+    @apply flex w-[85%] flex-col items-center gap-5 rounded-3xl border-[1px] border-gray-400 bg-white py-4 pb-8 pt-8 lg:w-[45%] 2xl:w-[28%];
   }
   .tracking-empty {
     @apply self-center rounded-xl border-2 border-cyan-300 bg-white px-4 py-2 text-lg font-semibold text-cyan-300;
   }
   .tracking-container {
-    @apply flex w-full flex-col items-center gap-5;
+    @apply flex w-full flex-row flex-wrap items-center justify-center gap-5;
   }
   .tracking-component {
     @apply flex min-h-[100dvh] flex-col items-center gap-10 pb-[150px] pt-[123px] lg:pt-[308px];
@@ -248,26 +248,26 @@ div {
   .cart-item-image {
     @apply relative flex w-[30%] items-center justify-center rounded-full;
   }
-  .cart-item-container {
-    @apply relative mb-[35px] flex h-fit w-[96%] flex-col items-center justify-center gap-6 rounded-xl bg-white px-4 py-12 lg:w-[45%] 2xl:w-[24%];
-  }
-  .cart-box-container {
-    @apply flex w-full flex-row flex-wrap items-center justify-center gap-5;
-  }
   .empty-cart {
     @apply self-center rounded-xl border-2 border-cyan-300 bg-white px-4 py-2 text-lg font-semibold text-cyan-300;
   }
   .confirm-button {
     @apply fixed bottom-[115px] z-50 flex w-fit cursor-pointer items-center justify-between gap-3 self-center rounded-full border-[1px] border-white bg-cyan-100 px-8 py-3 font-bold text-white lg:bottom-[65px];
   }
-  .cart-container {
-    @apply flex w-[95%] flex-col gap-16 md:w-[70%] md:pt-[55px] lg:w-[75%] lg:pt-[72px];
+  .cart-item-container {
+    @apply relative mb-[35px] flex h-fit w-[96%] flex-col items-center justify-center gap-6 rounded-xl bg-white px-4 py-12 lg:w-[45%] 2xl:w-[28%];
   }
-  .ui-head-title {
-    @apply absolute left-[50%] top-[4%] flex w-fit -translate-x-[50%] -translate-y-[4%] cursor-pointer items-center justify-center rounded-full bg-[#01634a] px-8 py-3 font-[600] text-white md:min-w-fit lg:left-[50%] lg:top-[21%] lg:-translate-x-[50%] lg:-translate-y-[21%] lg:text-lg lg:font-bold;
+  .cart-box-container {
+    @apply flex w-full flex-row flex-wrap items-center justify-center gap-5;
+  }
+  .cart-container {
+    @apply flex w-[95%] flex-col gap-16 md:w-[70%] md:pt-[0px] lg:w-[75%] lg:pt-[0px];
   }
   .cart-component {
     @apply flex min-h-[100dvh] flex-col items-center gap-10 pb-[177px] pt-[123px] lg:pb-[150px] lg:pt-[308px];
+  }
+  .ui-head-title {
+    @apply absolute left-[50%] top-[4%] flex w-fit -translate-x-[50%] -translate-y-[4%] cursor-pointer items-center justify-center rounded-full bg-[#01634a] px-8 py-3 font-[600] text-white md:min-w-fit lg:left-[50%] lg:top-[21%] lg:-translate-x-[50%] lg:-translate-y-[21%] lg:text-lg lg:font-bold;
   }
   .navbar-items {
     @apply flex flex-row justify-around;
@@ -297,10 +297,10 @@ div {
     @apply absolute left-[50%] top-[4%] flex min-w-[350px] max-w-fit -translate-x-[50%] -translate-y-[4%] cursor-pointer items-center justify-center rounded-3xl border-[1px] border-cyan-100 bg-[#01634a] px-10 py-5 text-base font-[600] text-white sm:min-w-fit lg:left-[50%] lg:top-[95%] lg:-translate-x-[50%] lg:-translate-y-[95%] lg:text-lg lg:font-bold;
   }
   .trackingbox {
-    @apply flex w-[98%] flex-row items-center justify-around gap-4 rounded-xl border-[1px] border-cyan-300 p-2 lg:w-[36%];
+    @apply flex w-fit flex-row items-center justify-around gap-8 rounded-xl border-[1px] border-cyan-300 px-6 py-2;
   }
   .trackingstatus {
-    @apply flex flex-row items-center justify-around gap-2;
+    @apply flex w-fit flex-row items-center gap-4;
   }
 }
 

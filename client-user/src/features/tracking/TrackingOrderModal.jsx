@@ -1,3 +1,4 @@
+import { FaArrowAltCircleRight } from "react-icons/fa";
 import StarRating from "../../ui/StarRating";
 import { ClipLoader } from "react-spinners";
 import { BsStars } from "react-icons/bs";
@@ -63,29 +64,26 @@ const TrackingOrderModal = ({ item }) => {
                   alt="shopping-cart"
                 />
               </div>
-              <div className="w-[170px]">
+              <div className="w-fit">
                 <p>Order placed</p>
               </div>
             </div>
           </div>
         )}
         {isStep(item, "REJECTED") && (
-          <div className="flex w-full flex-col gap-6">
-            <div className="trackingbox">
-              <div className="trackingstatus">
-                <div className="h-[45px] w-[45px]">
-                  <img
-                    src="/images/rejected.png"
-                    className="h-[100%] w-[100%] object-cover"
-                    alt="shopping-cart"
-                  />
-                </div>
-                <div className="w-fit">
-                  <p>Order Rejected</p>
-                </div>
+          <div className="trackingbox">
+            <div className="trackingstatus">
+              <div className="h-[45px] w-[45px]">
+                <img
+                  src="/images/rejected.png"
+                  className="h-[100%] w-[100%] object-cover"
+                  alt="shopping-cart"
+                />
+              </div>
+              <div className="w-fit">
+                <p>Order Rejected</p>
               </div>
             </div>
-            <p className="trackingbox-reject">{item.reject_message}</p>
           </div>
         )}
 
@@ -100,7 +98,7 @@ const TrackingOrderModal = ({ item }) => {
                   alt="shopping-cart"
                 />
               </div>
-              <div className="w-[170px]">
+              <div className="w-fit">
                 <p>Preparing your order</p>
               </div>
             </div>
@@ -117,8 +115,8 @@ const TrackingOrderModal = ({ item }) => {
                   alt="shopping-cart"
                 />
               </div>
-              <div className="w-[170px]">
-                <p>Awaiting carrier pickup</p>
+              <div className="w-fit">
+                <p>Awaiting pickup</p>
               </div>
             </div>
           </div>
@@ -135,8 +133,8 @@ const TrackingOrderModal = ({ item }) => {
                     alt="shopping-cart"
                   />
                 </div>
-                <div className="w-[170px]">
-                  <p>Order on the way</p>
+                <div className="w-fit">
+                  <p>On the way</p>
                 </div>
               </div>
             </div>
@@ -155,8 +153,8 @@ const TrackingOrderModal = ({ item }) => {
                     alt="shopping-cart"
                   />
                 </div>
-                <div className="w-[170px]">
-                  <p>Driver is near you</p>
+                <div className="w-fit">
+                  <p>Driver is nearby</p>
                 </div>
               </div>
             </div>
@@ -166,12 +164,6 @@ const TrackingOrderModal = ({ item }) => {
         {isStep(item, "DELIVERED") && (
           <>
             <div className="trackingbox">
-              <input
-                readOnly
-                type="checkbox"
-                className="w-[18px] accent-green"
-                checked={true}
-              />
               <div className="trackingstatus">
                 <div className="h-[45px] w-[45px]">
                   <img
@@ -180,8 +172,8 @@ const TrackingOrderModal = ({ item }) => {
                     alt="shopping-cart"
                   />
                 </div>
-                <div className="w-[170px]">
-                  <p>Delivered</p>
+                <div className="w-fit">
+                  <p>Order Delivered</p>
                 </div>
               </div>
             </div>
@@ -220,7 +212,8 @@ const TrackingOrderModal = ({ item }) => {
                   <input name="username" type="hidden" value={item?.name} />
                   <input name="orderId" type="hidden" value={item?._id} />
                   <button type="submit" className="trackingbox-submit">
-                    Submit
+                    <p>Submit</p>
+                    <FaArrowAltCircleRight />
                   </button>
                 </div>
               </Form>

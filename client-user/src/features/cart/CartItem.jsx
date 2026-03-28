@@ -80,7 +80,7 @@ const CartItem = ({ item }) => {
         {Extra?.map(([category, items]) => (
           <div key={category} className="extra-container">
             <div className="extra-titlebox">
-              <h1 className="extra-title">Want some more {category} ?</h1>
+              <h1 className="extra-title">Want additional {category} ?</h1>
               {items.length > 2 && (
                 <p className="text-xs text-gray-400">{"SWIPE TO VIEW >"}</p>
               )}
