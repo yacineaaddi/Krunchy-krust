@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Krunchy Krust</string>
+    <string name="title_activity_main">Krunchy Krust</string>
+    <string name="package_name">com.krunchykrust.userdash</string>
+    <string name="custom_url_scheme">com.krunchykrust.userdash</string>
+</resources>

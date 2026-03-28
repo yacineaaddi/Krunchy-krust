@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Krunchy Krust Admin</string>
+    <string name="title_activity_main">Krunchy Krust Admin</string>
+    <string name="package_name">com.krunchykrust.admindash</string>
+    <string name="custom_url_scheme">com.krunchykrust.admindash</string>
+</resources>
