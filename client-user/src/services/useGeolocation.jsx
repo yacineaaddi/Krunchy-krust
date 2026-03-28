@@ -29,20 +29,22 @@ export default function useGeolocation() {
       return coords;
     } catch (err) {
       if (typeof navigator !== "undefined" && navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            const coords = {
-              latitude: pos.coords.latitude,
-              longitude: pos.coords.longitude,
-            };
-            setPosition(coords);
-            return coords;
-          },
-          (err) => {
-            toast.error(err.message);
-            console.error("Browser error:", err);
-          },
-        );
+        try {
+          const pos = await new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject);
+          });
+
+          const coords = {
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude,
+          };
+
+          setPosition(coords);
+          return coords;
+        } catch (browserErr) {
+          toast.error(browserErr.message);
+          console.error("Browser error:", browserErr);
+        }
       } else {
         toast.error(err.message);
         console.error("Capacitor and browser geolocation failed", err);
