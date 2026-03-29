@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import api from "../api/api";
 
-const OrderCard = ({ item, getLocation }) => {
+const OrderCard = ({ item, getuserLocation }) => {
   const [paid, setPaid] = useState(null);
 
   const { setOrders } = useApp();
@@ -55,7 +55,10 @@ const OrderCard = ({ item, getLocation }) => {
             <div className="order-details">
               <span className="font-semibold">Address :</span> {item.address}
             </div>
-            <div onClick={() => getLocation(item)} className="location-button">
+            <div
+              onClick={() => getuserLocation(item)}
+              className="location-button"
+            >
               Location
             </div>
           </div>

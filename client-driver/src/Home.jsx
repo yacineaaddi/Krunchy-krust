@@ -12,7 +12,7 @@ const Home = () => {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const { getPosition } = useGeolocation();
+  const { getLocation } = useGeolocation();
 
   const { orders, setOrders } = useApp();
 
@@ -85,7 +85,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchLocation = async () => {
-      const coords = await getPosition();
+      const coords = await getLocation();
 
       if (!coords || orders.length == 0) return;
 
@@ -124,7 +124,7 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [orders]);
 
-  const getLocation = (item) => {
+  const getuserLocation = (item) => {
     const mapUrl = `https://www.google.com/maps?q=${item.location.coordinates[1]},${item.location.coordinates[0]}`;
     window.open(mapUrl, "_blank");
   };
@@ -155,7 +155,7 @@ const Home = () => {
                 key={item._id}
                 item={item}
                 index={index}
-                getLocation={getLocation}
+                getuserLocation={getuserLocation}
               />
             ))}
         </div>
